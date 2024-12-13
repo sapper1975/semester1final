@@ -179,6 +179,7 @@ public class Chemin {
 
 public static void main(String[] args) {
     Chemin deck = new Chemin();
+    // Crouper table = new Croupier();
 
     System.out.println(deck.playerHandFacesTwo());
     deck.naturalCheck();
