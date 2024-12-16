@@ -9,6 +9,9 @@ public class Chemin {
     public int playerHandValue = 0;
     public int bankerHandValue = 0;
     public int playerThirdCardValue = -1;
+    public int winner = -1;
+
+    Croupier j = new Croupier();
 
     ArrayList<Card>Cards = new ArrayList<Card>(); {
         {
@@ -128,7 +131,7 @@ public class Chemin {
         Scanner input = new Scanner(System.in);
         System.out.println("Do you want a third card? (y/n)");
         String userInput = input.nextLine();
-        if (userInput.equals("y")) {
+        if (userInput.equals("y")||userInput.equals("yes")) {
             t = r.nextInt(Cards.size());
             playerHand.add(Cards.get(t));
             input.close();
@@ -136,7 +139,7 @@ public class Chemin {
             playerHandValue = playerHandValueThree();
             playerThirdCardValue = playerHand.get(2).getValue();
         }
-        else if (userInput.equals("n")) {
+        else if (userInput.equals("n")||userInput.equals("no")) {
             System.out.println("The player does not take a third card");
         }
 
@@ -181,6 +184,7 @@ public static void main(String[] args) {
     Chemin deck = new Chemin();
     // Crouper table = new Croupier();
 
+    deck.j.playerBet();
     System.out.println(deck.playerHandFacesTwo());
     deck.naturalCheck();
     deck.playerThirdCard();
