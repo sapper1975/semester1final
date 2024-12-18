@@ -10,6 +10,7 @@ public class Chemin {
     public int bankerHandValue = 0;
     public int playerThirdCardValue = -1;
     public int winner = -1;
+    
 
     Croupier j = new Croupier();
 
@@ -117,13 +118,19 @@ public class Chemin {
     }
 
     public void winCondition() {
-        if (playerHandValue > bankerHandValue)
+        if (playerHandValue > bankerHandValue) {
+            winner = 0;
             System.out.println("Player wins with a hand worth " + playerHandValue + " against the banker hand worth " + bankerHandValue);
-        else if (bankerHandValue > playerHandValue)
+        } else if (bankerHandValue > playerHandValue) {
+            winner = 1;
             System.out.println("Banker wins with a hand worth " + bankerHandValue + " against the player hand worth " + playerHandValue);
-        else 
+        } else{ 
+            winner = 2;
             System.out.println("Egalite, tie hand.");
+
+        j.winConditionBet(winner);
         System.exit(0);
+        }
     }
 
     public void playerThirdCard(){
@@ -182,7 +189,6 @@ public class Chemin {
 
 public static void main(String[] args) {
     Chemin deck = new Chemin();
-    // Crouper table = new Croupier();
 
     deck.j.playerBet();
     System.out.println(deck.playerHandFacesTwo());
@@ -190,6 +196,7 @@ public static void main(String[] args) {
     deck.playerThirdCard();
     deck.bankerThirdCard();
     deck.winCondition();
-
     }
 }
+//i feel like bookclub shouldnt make the list
+// at the rate we're going??
