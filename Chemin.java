@@ -108,13 +108,16 @@ public class Chemin {
         return "The banker has a " + bankerHand.get(0).readCard() + " and " + bankerHand.get(1).readCard() + ", which is worth " + bankerHandValueTwo();
     }
 
-    public void naturalCheck () {
+    public boolean naturalCheck () {
         if (playerHandValueTwo() >= 8 || bankerHandValueTwo() >=8) {
             System.out.println("Natural");
             playerHandFacesTwo();
             System.out.println(bankerHandRevealThree());
-            winCondition();
+            return true;
+        } else {
+            return false;
         }
+
     }
 
     public void winCondition() {
@@ -127,10 +130,9 @@ public class Chemin {
         } else{ 
             winner = 2;
             System.out.println("Egalite, tie hand.");
-
-        j.winConditionBet(winner);
-        System.exit(0);
         }
+        j.winConditionBet(winner);
+        
     }
 
     public void playerThirdCard(){
@@ -189,13 +191,31 @@ public class Chemin {
 
 public static void main(String[] args) {
     Chemin deck = new Chemin();
+    boolean play = true;
+    Scanner input = new Scanner(System.in);
 
-    deck.j.playerBet();
-    System.out.println(deck.playerHandFacesTwo());
-    deck.naturalCheck();
-    deck.playerThirdCard();
-    deck.bankerThirdCard();
-    deck.winCondition();
+    while (play == true) {
+        
+        System.out.println("Do you want to play a round? (y/n)");
+        String userInput = input.nextLine();
+            if (userInput.equals("y")||userInput.equals("yes")){
+                System.out.println(deck.j.readPlayerChipsAmount());
+                deck.j.playerBet();
+                System.out.println(deck.playerHandFacesTwo());
+                if (deck.naturalCheck()){
+                    deck.winCondition();
+                } else {
+                deck.playerThirdCard();
+                deck.bankerThirdCard();
+                deck.winCondition();
+                }
+            } else if (userInput.equals("n")||userInput.equals("no"))
+                play = false;
+            else
+                System.out.println("Unidentified response.");
+            
+        }
+        System.exit(0);
     }
 }
 //i feel like bookclub shouldnt make the list

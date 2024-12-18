@@ -13,7 +13,9 @@ public class Croupier{
     private Random r = new Random();
 
     public void playerBet(){
-        playerBet = false;
+        if (playerBetAmount == 0)
+            playerBet = false;
+
         Scanner input = new Scanner(System.in);
 
         bankerBetAmount = r.nextInt(401);
@@ -52,19 +54,28 @@ public class Croupier{
     public void winConditionBet(int winner){
         if (winner == 0) {
             chips = chips + 2*playerBetAmount;
-            playerBetAmount = 0;
             System.out.println("The player wins " + 2*playerBetAmount + " chips");
+            playerBetAmount = 0;
         } else if (winner == 1) {
             chips = chips - playerBetAmount;
-            System.out.println("The player loses" + playerBetAmount + " chips");
+            System.out.println("The player loses " + playerBetAmount + " chips");
             playerBetAmount = 0;
         } else if (winner == 2) {
+            chips = chips - playerBetAmount;
             System.out.println(playerBetAmount + " chips are retained for the next hand");
              
         }
+        System.out.println(readPlayerChipsAmount());
         
     }
 
+    public int getChips(){
+        return chips;
+    }
+
+    public String readPlayerChipsAmount(){
+        return "The player has a total of " + chips + " chips ";
+    }
 
 
 }
