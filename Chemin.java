@@ -48,26 +48,34 @@ public class Chemin {
 
     ArrayList<Card>playerHand = new ArrayList<Card>(); {
         {
-            int z = r.nextInt(Cards.size());
-            Card firstPlayerCard = Cards.get(z);
-            playerHand.add(firstPlayerCard);
-            z = r.nextInt(Cards.size());
-            Card secondPlayerCard = Cards.get(z);
-            playerHand.add(secondPlayerCard);
-            playerHandValue = playerHandValueTwo();
+           
         }
     }
 
+    public void createPlayerHand(){
+        int z = r.nextInt(Cards.size());
+        Card firstPlayerCard = Cards.get(z);
+        playerHand.add(firstPlayerCard);
+        z = r.nextInt(Cards.size());
+        Card secondPlayerCard = Cards.get(z);
+        playerHand.add(secondPlayerCard);
+        playerHandValue = playerHandValueTwo();
+    }
+    
     ArrayList<Card>bankerHand = new ArrayList<Card>(); {
         {
-            int z = r.nextInt(Cards.size());
+            
+        }
+    }
+
+    public void createBankerHand(){
+        int z = r.nextInt(Cards.size());
             Card firstBankerCard = Cards.get(z);
             bankerHand.add(firstBankerCard);
             z = r.nextInt(Cards.size());
             Card secondBankerCard = Cards.get(z);
             bankerHand.add(secondBankerCard);
             bankerHandValue = bankerHandValueTwo();
-        }
     }
 
     public int playerHandValueTwo(){
@@ -192,13 +200,17 @@ public class Chemin {
 public static void main(String[] args) {
     Chemin deck = new Chemin();
     boolean play = true;
-    Scanner input = new Scanner(System.in);
 
-    while (play == true) {
-        
+    while (play == true) {   
+        deck.playerHand.clear();
+        deck.bankerHand.clear(); 
         System.out.println("Do you want to play a round? (y/n)");
-        String userInput = input.nextLine();
+        String userInput = "";
+        Scanner input = new Scanner(System.in);
+        userInput = input.nextLine();
             if (userInput.equals("y")||userInput.equals("yes")){
+                deck.createBankerHand();
+                deck.createPlayerHand();
                 System.out.println(deck.j.readPlayerChipsAmount());
                 deck.j.playerBet();
                 System.out.println(deck.playerHandFacesTwo());
@@ -213,7 +225,7 @@ public static void main(String[] args) {
                 play = false;
             else
                 System.out.println("Unidentified response.");
-            
+
         }
         System.exit(0);
     }
