@@ -200,35 +200,35 @@ public class Chemin {
 public static void main(String[] args) {
     Chemin deck = new Chemin();
     boolean play = true;
+    Scanner input = new Scanner(System.in);
 
     while (play == true) {   
         deck.playerHand.clear();
         deck.bankerHand.clear(); 
         System.out.println("Do you want to play a round? (y/n)");
         String userInput = "";
-        Scanner input = new Scanner(System.in);
-        userInput = input.nextLine();
-            if (userInput.equals("y")||userInput.equals("yes")){
-                deck.createBankerHand();
-                deck.createPlayerHand();
-                System.out.println(deck.j.readPlayerChipsAmount());
-                deck.j.playerBet();
-                System.out.println(deck.playerHandFacesTwo());
-                if (deck.naturalCheck()){
-                    deck.winCondition();
-                } else {
+        userInput = input.nextLine().trim();
+        if (userInput.equals("y")||userInput.equals("yes")){
+            deck.createBankerHand();
+            deck.createPlayerHand();
+            System.out.println(deck.j.readPlayerChipsAmount());
+            deck.j.playerBet();
+            System.out.println(deck.playerHandFacesTwo());
+            if (deck.naturalCheck()){
+                deck.winCondition();
+            } else {
                 deck.playerThirdCard();
                 deck.bankerThirdCard();
                 deck.winCondition();
-                }
-            } else if (userInput.equals("n")||userInput.equals("no"))
-                play = false;
-            else
-                System.out.println("Unidentified response.");
-
+            }
+        } else if (userInput.equals("n")||userInput.equals("no"))
+            play = false;
+        else{
+            System.out.println("Unidentified response.");
+            }
         }
-        System.exit(0);
+        // System.exit(0);
     }
-}
+}   
 //i feel like bookclub shouldnt make the list
 // at the rate we're going??
